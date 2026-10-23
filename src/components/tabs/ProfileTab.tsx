@@ -24,6 +24,21 @@ export const ProfileTab: React.FC = () => {
 
   const availableDistricts = getDistrictsForState(formData.state);
 
+  React.useEffect(() => {
+    if (user) {
+      setFormData({
+        fullName: user.fullName || '',
+        age: user.age ? String(user.age) : '35',
+        phoneNumber: user.phoneNumber || '',
+        address: user.address || '',
+        state: user.state || 'Maharashtra',
+        district: user.district || 'Pune',
+        villageCity: user.villageCity || '',
+        farmAreaAcres: user.farmAreaAcres ? String(user.farmAreaAcres) : '4.5',
+      });
+    }
+  }, [user]);
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSuccessMessage(null);
